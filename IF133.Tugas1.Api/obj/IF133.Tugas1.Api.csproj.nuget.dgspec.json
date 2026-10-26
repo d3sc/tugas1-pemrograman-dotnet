@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ikbar\\Documents\\kuliah\\kuliah_semester5\\dotnet\\IF133-Tugas1\\IF133.Tugas1.Api\\IF133.Tugas1.Api.csproj": {}
+    "C:\\Users\\ikbar\\Documents\\kuliah\\kuliah_semester5\\dotnet\\IF133-Tugas1\\IF133.Tugas1.Api\\IF133.TUgas1.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ikbar\\Documents\\kuliah\\kuliah_semester5\\dotnet\\IF133-Tugas1\\IF133.Tugas1.Api\\IF133.Tugas1.Api.csproj": {
+    "C:\\Users\\ikbar\\Documents\\kuliah\\kuliah_semester5\\dotnet\\IF133-Tugas1\\IF133.Tugas1.Api\\IF133.TUgas1.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ikbar\\Documents\\kuliah\\kuliah_semester5\\dotnet\\IF133-Tugas1\\IF133.Tugas1.Api\\IF133.Tugas1.Api.csproj",
-        "projectName": "IF133.Tugas1.Api",
-        "projectPath": "C:\\Users\\ikbar\\Documents\\kuliah\\kuliah_semester5\\dotnet\\IF133-Tugas1\\IF133.Tugas1.Api\\IF133.Tugas1.Api.csproj",
+        "projectUniqueName": "C:\\Users\\ikbar\\Documents\\kuliah\\kuliah_semester5\\dotnet\\IF133-Tugas1\\IF133.Tugas1.Api\\IF133.TUgas1.Api.csproj",
+        "projectName": "IF133.TUgas1.Api",
+        "projectPath": "C:\\Users\\ikbar\\Documents\\kuliah\\kuliah_semester5\\dotnet\\IF133-Tugas1\\IF133.Tugas1.Api\\IF133.TUgas1.Api.csproj",
         "packagesPath": "C:\\Users\\ikbar\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\ikbar\\Documents\\kuliah\\kuliah_semester5\\dotnet\\IF133-Tugas1\\IF133.Tugas1.Api\\obj\\",
         "projectStyle": "PackageReference",

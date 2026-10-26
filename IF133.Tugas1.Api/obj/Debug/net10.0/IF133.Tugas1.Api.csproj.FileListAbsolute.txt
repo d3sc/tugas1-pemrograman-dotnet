@@ -145,3 +145,4 @@ C:\Users\ikbar\Documents\kuliah\kuliah_semester5\dotnet\IF133-Tugas1\IF133.Tugas
 C:\Users\ikbar\Documents\kuliah\kuliah_semester5\dotnet\IF133-Tugas1\IF133.Tugas1.Api\bin\Debug\net10.0\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\ikbar\Documents\kuliah\kuliah_semester5\dotnet\IF133-Tugas1\IF133.Tugas1.Api\bin\Debug\net10.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\ikbar\Documents\kuliah\kuliah_semester5\dotnet\IF133-Tugas1\IF133.Tugas1.Api\bin\Debug\net10.0\runtimes\win-x86\native\e_sqlite3.dll
+C:\Users\ikbar\Documents\kuliah\kuliah_semester5\dotnet\IF133-Tugas1\IF133.Tugas1.Api\obj\Debug\net10.0\IF133.Tugas1.Api.sourcelink.json

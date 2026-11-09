@@ -3,6 +3,7 @@ using IF133.Tugas1.Api.Data;
 using IF133.Tugas1.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProductApi.Dtos;
 
 namespace IF133.Tugas1.Api.Controllers;
 
@@ -10,11 +11,23 @@ namespace IF133.Tugas1.Api.Controllers;
 [Route("api/products")]
 public class ProductsController : ControllerBase
 {
-    private readonly AppDbContext _context;
+    private static ProductReadDto ToReadDto(Product product)
+    {
+        return new ProductReadDto
+        {
+            Id = product.Id,
+            Name = product.Name,
+            Description = product.Description,
+            Price = product.Price
+        };
+    }
 
-    public ProductsController(AppDbContext context)
+    private readonly AppDbContext _context;
+    private readonly ILogger<ProductsController> _logger;
+    public ProductsController(AppDbContext context, ILogger<ProductsController> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
     // GET /api/products
@@ -22,6 +35,14 @@ public class ProductsController : ControllerBase
     public async Task<ActionResult<IEnumerable<Product>>> GetAll()
     {
         var products = await _context.Products
+            // menambahkan DTO untuk membaca data produk
+            .Select(p => new ProductReadDto
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description = p.Description,
+                Price = p.Price
+            })
             .AsNoTracking()
             .ToListAsync();
 
@@ -38,19 +59,26 @@ public class ProductsController : ControllerBase
 
         if (product is null)
         {
-            return NotFound(new { message = "Produk tidak ditemukan." });
+            _logger.LogWarning("Produk {Id} tidak ditemukan", id);
+            return NotFound(new ProblemDetails
+            {
+                Title = "Produk tidak ditemukan",
+                Detail = $"Produk dengan id {id} tidak ditemukan.",
+                Status = StatusCodes.Status404NotFound
+            });
         }
 
-        return Ok(product);
+        _logger.LogInformation("Produk {Id} ditemukan", id);
+
+        return Ok(ToReadDto(product));
     }
 
     // POST /api/products
     [HttpPost]
-    public async Task<ActionResult<Product>> Create(
-        [FromBody] ProductRequest request)
+    public async Task<ActionResult<ProductReadDto>> CreateProduct(
+        CreateProductDto dto)
     {
-        if (request.Price is not decimal price ||
-            request.Stock is not int stock)
+        if (dto.Price is <= 0 || dto.Stock is <= 0)
         {
             return BadRequest(new
             {
@@ -60,29 +88,31 @@ public class ProductsController : ControllerBase
 
         var product = new Product
         {
-            Name = request.Name.Trim(),
-            Description = request.Description,
-            Price = price,
-            Stock = stock
+            Name = dto.Name.Trim(),
+            Description = dto.Description,
+            Price = dto.Price,
+            Stock = (int)dto.Stock
         };
 
         _context.Products.Add(product);
         await _context.SaveChangesAsync();
 
+        _logger.LogInformation("Created product {Id} - {Name}", product.Id, product.Name);
+
         return CreatedAtAction(
             nameof(GetById),
             new { id = product.Id },
-            product
+            ToReadDto(product)
         );
     }
 
+    // PUT /api/products/1
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(
         int id,
-        [FromBody] ProductRequest request)
+        UpdateProductDto dto)
     {
-        if (request.Price is not decimal price ||
-            request.Stock is not int stock)
+        if (dto.Price is <= 0 || dto.Stock is <= 0)
         {
             return BadRequest(new
             {
@@ -100,14 +130,16 @@ public class ProductsController : ControllerBase
             });
         }
 
-        product.Name = request.Name.Trim();
-        product.Description = request.Description;
-        product.Price = price;
-        product.Stock = stock;
+        product.Name = dto.Name.Trim();
+        product.Description = dto.Description;
+        product.Price = dto.Price;
+        product.Stock = (int)dto.Stock;
 
         await _context.SaveChangesAsync();
 
-        return Ok(product);
+        _logger.LogInformation("Produk {Id} - {Name} diubah", id, product.Name);
+
+        return Ok(ToReadDto(product));
     }
 
     // DELETE /api/products/1
@@ -118,8 +150,16 @@ public class ProductsController : ControllerBase
 
         if (product is null)
         {
-            return NotFound(new { message = "Produk tidak ditemukan." });
+            _logger.LogWarning("Produk {Id} tidak ditemukan", id);
+            return NotFound(new ProblemDetails
+            {
+                Title = "Produk tidak ditemukan",
+                Detail = $"Produk dengan id {id} tidak ditemukan.",
+                Status = StatusCodes.Status404NotFound
+            });
         }
+
+        _logger.LogInformation("Produk {Id} - {Name} dihapus", id, product.Name);
 
         _context.Products.Remove(product);
         await _context.SaveChangesAsync();

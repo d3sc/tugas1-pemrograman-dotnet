@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace ProductsApi.Dtos;
+namespace ProductApi.Dtos;
 
 public class ProductReadDto
 {
@@ -8,4 +8,5 @@ public class ProductReadDto
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
     public decimal Price { get; set; }
+    public decimal Stock { get; set; }
 }

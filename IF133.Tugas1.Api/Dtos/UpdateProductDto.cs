@@ -13,4 +13,7 @@ public class UpdateProductDto
     public string? Description { get; set; }
     [Range(0.01, 100000000)]
     public decimal Price { get; set; }
+
+    [Range(0, 100000000)]
+    public decimal Stock { get; set; }
 }

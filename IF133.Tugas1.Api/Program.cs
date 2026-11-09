@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using IF133.Tugas1.Api.Data;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http.Metadata;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,20 +15,39 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     )
 );
 
+// Tambahkan CORS untuk development di port 3000
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FrontendDev", policy =>
+    policy.WithOrigins("http://localhost:3000")
+    .AllowAnyHeader()
+    .AllowAnyMethod());
+});
+
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
+app.UseCors("FrontendDev");
+
+// menambahkan Global exception handler
 app.UseExceptionHandler(errorApp =>
 {
     errorApp.Run(async context =>
     {
+        var logger = context.RequestServices
+    .GetRequiredService<ILogger<Program>>();
+        var exception = context.Features
+    .Get<IExceptionHandlerFeature>()?.Error;
+        logger.LogError(exception, "Unhandled exception occurred");
+        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
         await Results.Problem(
-            statusCode: StatusCodes.Status500InternalServerError,
-            title: "Terjadi kesalahan internal pada server."
-        ).ExecuteAsync(context);
+    title: "Internal Server Error",
+    detail: "Terjadi kesalahan pada server.",
+    statusCode: StatusCodes.Status500InternalServerError)
+    .ExecuteAsync(context);
     });
 });
 

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IF133.Tugas1.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2ad413b82c66b870295c584587fe6aebd4633ccf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+27547a18bcce05d52b946b4c5f9757506f363284")]
 [assembly: System.Reflection.AssemblyProductAttribute("IF133.Tugas1.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IF133.Tugas1.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -75,14 +75,14 @@ Respons yang diharapkan: GET berhasil `200 OK` (atau `404 Not Found` jika ID tid
 
 Lengkapi tabel berikut setelah menjalankan pengujian melalui Postman atau HTTP client. Simpan screenshot di folder `Bukti` dan cantumkan nama berkasnya.
 
-| Pengujian | Hasil yang diharapkan | Hasil aktual / bukti |
+| Pengujian | Hasil yang diharapkan |
 |---|---|---|
-| POST `/api/products` | `201 Created`, produk tersimpan | Belum dilampirkan |
-| GET `/api/products` | `200 OK`, daftar produk tampil | Belum dilampirkan |
-| GET `/api/products/{id}` | `200 OK` untuk ID yang ada | Belum dilampirkan |
-| PUT `/api/products/{id}` | `200 OK`, perubahan tersimpan | Belum dilampirkan |
-| DELETE `/api/products/{id}` | `204 No Content` | Belum dilampirkan |
-| GET setelah aplikasi dijalankan ulang | Data yang tersimpan tetap dapat dibaca | Belum dilampirkan |
+| POST `/api/products` | `201 Created`, produk tersimpan |
+| GET `/api/products` | `200 OK`, daftar produk tampil |
+| GET `/api/products/{id}` | `200 OK` untuk ID yang ada |
+| PUT `/api/products/{id}` | `200 OK`, perubahan tersimpan |
+| DELETE `/api/products/{id}` | `204 No Content` |
+| GET setelah aplikasi dijalankan ulang | Data yang tersimpan tetap dapat dibaca |
 
 Project menyediakan OpenAPI di `/openapi/v1.json` pada environment Development. Swagger UI tidak dikonfigurasi.
 

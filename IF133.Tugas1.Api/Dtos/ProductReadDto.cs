@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace ProductApi.Dtos;
 
 public class ProductReadDto

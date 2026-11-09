@@ -18,7 +18,8 @@ public class ProductsController : ControllerBase
             Id = product.Id,
             Name = product.Name,
             Description = product.Description,
-            Price = product.Price
+            Price = product.Price,
+            Stock = product.Stock
         };
     }
 
@@ -41,7 +42,8 @@ public class ProductsController : ControllerBase
                 Id = p.Id,
                 Name = p.Name,
                 Description = p.Description,
-                Price = p.Price
+                Price = p.Price,
+                Stock = p.Stock
             })
             .AsNoTracking()
             .ToListAsync();
@@ -139,7 +141,7 @@ public class ProductsController : ControllerBase
 
         _logger.LogInformation("Produk {Id} - {Name} diubah", id, product.Name);
 
-        return Ok(ToReadDto(product));
+        return NoContent();
     }
 
     // DELETE /api/products/1
